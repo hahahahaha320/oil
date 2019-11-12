@@ -23,42 +23,43 @@
   <main id="app"></main>
 </div>
 
-<template id="product-list">
+<template id="book-list">
   <section>
   <div class="actions">
-    <router-link class="btn btn-default" :to="{path: '/add-product'}">
+    <router-link class="btn btn-default" :to="{path: '/add-book'}">
       <span class="glyphicon glyphicon-plus"></span>
-      Add product
+      增加书本
     </router-link>
   </div>
   <div class="filters row">
     <div class="form-group col-sm-3">
-      <label for="search-element">Product name</label>
+      <label for="search-element">书名</label>
       <input v-model="searchKey" class="form-control" id="search-element" requred/>
     </div>
   </div>
   <table class="table">
     <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
+      <th>名字</th>
+      <th>描述</th>
+      <th>出版社</th>
       <th class="col-sm-2">Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr v-for="product in filteredProducts">
+    <tr v-for="book in filteredBookList">
       <td>
-        <router-link :to="{name: 'product', params: {product_id: product.id}}">{{ product.name }}</router-link>
+        {{ book.name }}
       </td>
-      <td>{{ product.description }}</td>
+      <td>{{ book.bookDetail.descr }}</td>
       <td>
-        {{ product.price }}
+        {{ book.press.name }}
         <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
       </td>
       <td>
-        <router-link class="btn btn-warning btn-xs" :to="{name: 'product-edit', params: {product_id: product.id}}">Edit</router-link>
-        <router-link class="btn btn-danger btn-xs" :to="{name: 'product-delete', params: {product_id: product.id}}">Delete</router-link>
+        <router-link class="btn btn-xs" :to="{name: 'book-view', params: {book_id: book.id}}">查看</router-link>
+        <router-link class="btn btn-warning btn-xs" :to="{name: 'book-edit', params: {book_id: book.id}}">编辑</router-link>
+        <router-link class="btn btn-danger btn-xs" :to="{name: 'book-delete', params: {book_id: book.id}}">删除</router-link>
       </td>
     </tr>
     </tbody>
@@ -66,70 +67,82 @@
   </section>
 </template>
 
-<template id="add-product">
+<template id="add-book">
     <section>
-  <h2>Add new product</h2>
-  <form v-on:submit="createProduct">
+  <h2>新增书本</h2>
+  <form v-on:submit="createBook">
     <div class="form-group">
-      <label for="add-name">Name</label>
-      <input class="form-control" id="add-name" v-model="product.name" required/>
+      <label for="add-name">名字</label>
+      <input class="form-control" id="add-name" v-model="book.name" required/>
     </div>
     <div class="form-group">
-      <label for="add-description">Description</label>
-      <textarea class="form-control" id="add-description" rows="10" v-model="product.description"></textarea>
+      <label for="add-description">描述</label>
+      <textarea class="form-control" id="add-description" rows="10" v-model="book.bookDetail.descr"></textarea>
     </div>
     <div class="form-group">
-      <label for="add-price">Price, <span class="glyphicon glyphicon-euro"></span></label>
-      <input type="number" class="form-control" id="add-price" v-model="product.price"/>
+      <label for="add-price">出版社id, <span class="glyphicon glyphicon-euro"></span></label>
+      <input type="number" class="form-control" id="add-price" v-model="book.press.id"/>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
-    <router-link to="'/'" class="btn btn-default">Cancel</router-link>
+    <router-link to="/" class="btn btn-default">Cancel</router-link>
   </form>
 </section>
 </template>
 
-<template id="product">
+<template id="book-view">
     <section>
-  <h2>{{ product.name }}</h2>
-  <b>Description: </b>
-  <div>{{ product.description }}</div>
-  <b>Price:</b>
-  <div>{{ product.price }}<span class="glyphicon glyphicon-euro"></span></div>
+  <h2>{{ book.name }}</h2>
+  <b>描述: </b>
+  <div>{{ book.bookDetail.descr }}</div>
+  <br/>
+  <b>出版社:</b>
+  <div>{{ book.press.name }}<span class="glyphicon glyphicon-euro"></span></div>
+  <br/>
+  <b>章节列表:</b>
+  <ul v-for="chapt in book.chapterList">
+    <li>第{{ chapt.id }}章.{{ chapt.title }}</li>
+  </ul>
+  <br/>
+  <b>作者列表:</b>
+  <ul v-for="author in book.authorList">
+    <li>{{ author.name }}</li>
+  </ul>
+  <br/>
   <br/>
   <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-  <router-link to="'/'">Back to product list</router-link>
+  <router-link to="/">返回列表</router-link>
 </section>
 </template>
 
-<template id="product-edit">
+<template id="book-edit">
     <section>
-  <h2>Edit product</h2>
-  <form v-on:submit="updateProduct">
+  <h2>编辑书本</h2>
+  <form v-on:submit="updateBook">
     <div class="form-group">
-      <label for="edit-name">Name</label>
-      <input class="form-control" id="edit-name" v-model="product.name" required/>
+      <label for="edit-name">名字</label>
+      <input class="form-control" id="edit-name" v-model="book.name" required/>
     </div>
     <div class="form-group">
-      <label for="edit-description">Description</label>
-      <textarea class="form-control" id="edit-description" rows="3" v-model="product.description"></textarea>
+      <label for="edit-description">描述</label>
+      <textarea class="form-control" id="edit-description" rows="3" v-model="book.bookDetail.descr"></textarea>
     </div>
     <div class="form-group">
-      <label for="edit-price">Price, <span class="glyphicon glyphicon-euro"></span></label>
-      <input type="number" class="form-control" id="edit-price" v-model="product.price"/>
+      <label for="edit-price">出版社id, <span class="glyphicon glyphicon-euro"></span></label>
+      <input type="number" class="form-control" id="edit-price" v-model="book.press.id"/>
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-    <router-link to="'/'" class="btn btn-default">Cancel</router-link>
+    <button type="submit" class="btn btn-primary">保存</button>
+    <router-link to="/" class="btn btn-default">取消</router-link>
   </form>
 </section>
 </template>
 
-<template id="product-delete">
+<template id="book-delete">
     <section>
-  <h2>Delete product {{ product.name }}</h2>
-  <form v-on:submit="deleteProduct">
-    <p>The action cannot be undone.</p>
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <router-link to="'/'" class="btn btn-default">Cancel</router-link>
+  <h2>删除书本[ {{ book.name }} ]?</h2>
+  <form v-on:submit="deleteBook">
+    <p>注意：此操作无法撤销.</p>
+    <button type="submit" class="btn btn-danger">删除</button>
+    <router-link to="/" class="btn btn-default">取消</router-link>
   </form>
 </section>
 </template>
@@ -137,6 +150,7 @@
 
 <script src='node_modules/vue/dist/vue.js'></script>
 <script src='node_modules/vue-router/dist/vue-router.js'></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="src/js/index.js"></script>
 
 </body>

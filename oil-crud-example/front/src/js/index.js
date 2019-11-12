@@ -1,102 +1,109 @@
-var products = [
-  {id: 1, name: 'Angular', description: 'Superheroic JavaScript MVW Framework.', price: 100},
-  {id: 2, name: 'Ember', description: 'A framework for creating ambitious web applications.', price: 100},
-  {id: 3, name: 'React', description: 'A JavaScript Library for building user interfaces.', price: 100}
-];
-
-function findProduct (productId) {
-  return products[findProductKey(productId)];
-};
-
-function findProductKey (productId) {
-  for (var key = 0; key < products.length; key++) {
-    if (products[key].id == productId) {
-      return key;
-    }
-  }
-};
-
+var bookList = [];
 var List = Vue.extend({
-  template: '#product-list',
+  template: '#book-list',
   data: function () {
-    return {products: products, searchKey: ''};
+    $.ajaxSettings.async = false;
+    $.getJSON("http://localhost:10080/book/get_all",function(result){
+      bookList = result;
+    });
+    return {bookList: bookList, searchKey: ''};
   },
   computed : {
-    filteredProducts: function () {
-    var self = this;
-    console.log()
-    return self.products.filter(function (product) {
-      return product.name.indexOf(self.searchKey) !== -1
-    })
-  }
-}
-});
-
-var Product = Vue.extend({
-  template: '#product',
-  data: function () {
-    return {product: findProduct(this.$route.params.product_id)};
+    filteredBookList: function () {
+      var self = this;
+      console.log();
+      return self.bookList.filter(function (book) {
+        return book.name.indexOf(self.searchKey) !== -1
+      })
+    }
   }
 });
-
-var ProductEdit = Vue.extend({
-  template: '#product-edit',
+var AddBook = Vue.extend({
+  template: '#add-book',
   data: function () {
-    return {product: findProduct(this.$route.params.product_id)};
+    return {book: {name: '', bookDetail:{descr: ''}, press:{id: 1}}
+    }
   },
   methods: {
-    updateProduct: function () {
-      var product = this.product;
-      products[findProductKey(product.id)] = {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price
-      };
-      router.push('/');
+    createBook: function() {
+      var book = this.book;
+      $.ajax({
+        type : "POST",
+        url : "http://localhost:10080/book/add",
+        data : JSON.stringify(book),
+        contentType : "application/json",
+        //dataType : "json",
+        complete:function(result) {
+          console.info(result);
+          router.push('/');
+        }
+      });
+
     }
   }
 });
 
-var ProductDelete = Vue.extend({
-  template: '#product-delete',
+var BookDelete = Vue.extend({
+  template: '#book-delete',
   data: function () {
-    return {product: findProduct(this.$route.params.product_id)};
+    return {book: findBook(this.$route.params.book_id)};
   },
   methods: {
-    deleteProduct: function () {
-      products.splice(findProductKey(this.$route.params.product_id), 1);
-      router.push('/');
-    }
-  }
-});
-
-var AddProduct = Vue.extend({
-  template: '#add-product',
-  data: function () {
-    return {product: {name: '', description: '', price: ''}
-    }
-  },
-  methods: {
-    createProduct: function() {
-      var product = this.product;
-      products.push({
-        id: Math.random().toString().split('.')[1],
-        name: product.name,
-        description: product.description,
-        price: product.price
+    deleteBook: function () {
+      $.getJSON("http://localhost:10080/book/delete?id="+this.book.id,function(result){
+        console.info(result.responseText);
       });
       router.push('/');
     }
   }
 });
+function findBook (bookId) {
+  return bookList[findBookKey(bookId)];
+};
 
+function findBookKey (bookId) {
+  for (var key = 0; key < bookList.length; key++) {
+    if (bookList[key].id == bookId) {
+      return key;
+    }
+  }
+};
+
+var BookEdit = Vue.extend({
+  template: '#book-edit',
+  data: function () {
+    return {book: findBook(this.$route.params.book_id)};
+  },
+  methods: {
+    updateBook: function() {
+      var book = this.book;
+      $.ajax({
+        type : "POST",
+        url : "http://localhost:10080/book/edit",
+        data : JSON.stringify(book),
+        contentType : "application/json",
+        //dataType : "json",
+        complete:function(result) {
+          console.info(result);
+          router.push('/');
+        }
+      });
+
+    }
+  }
+});
+var BookView = Vue.extend({
+  template: '#book-view',
+  data: function () {
+    return {book: findBook(this.$route.params.book_id)};
+  }
+});
 var router = new VueRouter({
   routes: [{path: '/', component: List},
-    {path: '/product/:product_id', component: Product, name: 'product'},
-    {path: '/add-product', component: AddProduct},
-    {path: '/product/:product_id/edit', component: ProductEdit, name: 'product-edit'},
-  {path:   '/product/:product_id/delete', component: ProductDelete, name: 'product-delete'}
+    {path: '/book/:book_id', component: BookView, name: 'book-view'},
+    {path: '/add-book', component: AddBook},
+    {path: '/book/:book_id/edit', component: BookEdit, name: 'book-edit'},
+    {path:   '/book/:book_id/delete', component: BookDelete, name: 'book-delete'}
 ]});
 
 new Vue({

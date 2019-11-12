@@ -1,6 +1,6 @@
 package com.oolong.oil.oilcrudexample.service;
 
-import com.oolong.oil.oilcrudexample.dataobject.Book;
+import com.oolong.oil.oilcrudexample.model.Book;
 import com.oolong.oil.oilcrudexample.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +21,13 @@ public class BookService {
     public Book getById(int id)  {
         Optional<Book> optional = bookRepository.findById(id);
         return optional.isPresent()?optional.get():null;
-}
+    }
+
+    public Book save(Book book)    {
+        return bookRepository.save(book);
+    }
+
+    public void delete(int id)    {
+        bookRepository.deleteById(id);
+    }
 }

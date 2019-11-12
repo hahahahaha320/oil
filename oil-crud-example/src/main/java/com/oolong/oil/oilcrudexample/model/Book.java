@@ -1,4 +1,4 @@
-package com.oolong.oil.oilcrudexample.dataobject;
+package com.oolong.oil.oilcrudexample.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -33,7 +33,7 @@ public class Book {
     private List<Chapter> chapterList;
 
 
-    private String state;
+    private String state = "ok";
     private Date createTime;
 
 }
