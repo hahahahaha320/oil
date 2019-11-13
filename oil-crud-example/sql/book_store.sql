@@ -41,14 +41,14 @@ CREATE TABLE `book` (
   `name` varchar(50) DEFAULT NULL COMMENT '名字',
   `book_detail_id` int(11) DEFAULT NULL,
   `press_id` int(11) DEFAULT NULL COMMENT '出版社id',
-  `state` varchar(10) DEFAULT 'ok' COMMENT '状态:ok,no',
+  `state` varchar(10) NOT NULL DEFAULT 'ok' COMMENT '状态:ok,no',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 /*Data for the table `book` */
 
-insert  into `book`(`id`,`name`,`book_detail_id`,`press_id`,`state`,`create_time`) values (1,'java编程思想',1,1,'ok','2019-11-07 18:30:47');
+insert  into `book`(`id`,`name`,`book_detail_id`,`press_id`,`state`,`create_time`) values (1,'java编程思想',1,1,'ok','2019-11-07 18:30:47'),(2,'C++ prime',2,1,'ok','2019-11-12 17:29:06'),(5,'计算机原理11111',8,1,'ok','2019-11-12 18:01:36');
 
 /*Table structure for table `book_author` */
 
@@ -75,11 +75,11 @@ CREATE TABLE `book_detail` (
   `descr` varchar(5000) DEFAULT NULL COMMENT '描述',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 /*Data for the table `book_detail` */
 
-insert  into `book_detail`(`id`,`descr`,`create_time`) values (1,'java编程是想是一本好书','2019-11-08 17:06:53'),(2,'java编程是想是一本好书222','2019-11-08 17:36:14');
+insert  into `book_detail`(`id`,`descr`,`create_time`) values (1,'java编程是想是一本好书','2019-11-08 17:06:53'),(2,'java编程是想是一本好书222','2019-11-08 17:36:14'),(8,'计算机原理计算机原理计算机原理计算机原理111','2019-11-12 18:01:36');
 
 /*Table structure for table `chapter` */
 
@@ -95,7 +95,7 @@ CREATE TABLE `chapter` (
 
 /*Data for the table `chapter` */
 
-insert  into `chapter`(`id`,`book_id`,`title`,`create_time`) values (1,1,'1.环境安装','2019-11-08 17:48:12'),(2,1,'2.jdk模块详解','2019-11-08 17:48:13');
+insert  into `chapter`(`id`,`book_id`,`title`,`create_time`) values (1,1,'环境安装','2019-11-08 17:48:12'),(2,1,'jdk模块详解','2019-11-08 17:48:13');
 
 /*Table structure for table `press` */
 
@@ -106,11 +106,11 @@ CREATE TABLE `press` (
   `name` varchar(20) DEFAULT NULL COMMENT '名字',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `press` */
 
-insert  into `press`(`id`,`name`,`create_time`) values (1,'长江出版社','2019-11-08 17:47:43');
+insert  into `press`(`id`,`name`,`create_time`) values (1,'长江出版社','2019-11-08 17:47:43'),(2,'清华大学出版社','2019-11-12 18:01:17');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
