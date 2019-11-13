@@ -1,0 +1,13 @@
+1.SSH和SSM框架组合的区别是什么?
+2.能描述一下 Spring Context初始化的整个流程吗?
+3.简单介绍一下Bean的生命周期及作用域
+4. Spring配置中的 placeholder占位符是如何替换的?有什么办法可以实现自定义的配置替换?
+5. SpringMVC的工作流程是怎样的?
+6. Spring如何解决循环依赖?
+7.Bean的构造方法、@ Postconstruct注解、 Initializing Bean、init- method的执
+样自
+8.说说Nety中有哪些重要的对象,它们之间的关系是什么?
+9.RPC与HTTP的区别是什么,什么场景适合选用RPC,什么场景适合使用HTTP?
+10.RPC的交互流程是怎样的?
+11.请介绍一下 Mybatis的缓存机制
+12. Mybatis如何配置动态SQL?有哪些动态SQL标签?
