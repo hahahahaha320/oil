@@ -1,7 +1,7 @@
-package com.oolong.oil.oilcrudexample.service;
+package com.oolong.oil.crudexample.service;
 
-import com.oolong.oil.oilcrudexample.model.Book;
-import com.oolong.oil.oilcrudexample.repository.BookRepository;
+import com.oolong.oil.crudexample.model.Book;
+import com.oolong.oil.crudexample.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

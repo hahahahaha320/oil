@@ -1,7 +1,7 @@
-package com.oolong.oil.oilcrudexample.controller;
+package com.oolong.oil.crudexample.controller;
 
-import com.oolong.oil.oilcrudexample.model.Book;
-import com.oolong.oil.oilcrudexample.service.BookService;
+import com.oolong.oil.crudexample.model.Book;
+import com.oolong.oil.crudexample.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.oolong.oil.oilcrudexample;
+package com.oolong.oil.crudexample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

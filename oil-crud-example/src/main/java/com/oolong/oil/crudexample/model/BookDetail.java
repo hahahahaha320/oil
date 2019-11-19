@@ -1,4 +1,4 @@
-package com.oolong.oil.oilcrudexample.model;
+package com.oolong.oil.crudexample.model;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.oolong.oil.oilcrudexample.config;
+package com.oolong.oil.crudexample.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

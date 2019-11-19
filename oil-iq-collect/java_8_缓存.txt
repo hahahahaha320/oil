@@ -1,6 +1,6 @@
-1. Redis�� Memcache��ʲô����?�����ѡ��?
-2.���õ�����ЩReds�����ݽṹ?����ʲô������?
-3. Redis����Щ�־û���ʽ,������ʲô?
-4. Redis�Ĺ��ڻ�����������? Redis����Щ��̭����?
-5.��α�֤Reds�ĸ߲����͸߿���?
-6.���ʹ��Redsʵ����ʱ����?���ʹ��Redsʵ�ֲַ�ʽ��?
+﻿1. Redis和 Memcache有什么区别?该如何选用?
+2.你用到过哪些Reds的数据结构?用在什么场景下?
+3. Redis有哪些持久化方式,区别是什么?
+4. Redis的过期机制是怎样的? Redis有哪些淘汰策略?
+5.如何保证Reds的高并发和高可用?
+6.如何使用Reds实现延时队列?如何使用Reds实现分布式锁?
