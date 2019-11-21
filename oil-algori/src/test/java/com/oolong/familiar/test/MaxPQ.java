@@ -1,7 +1,8 @@
-package com.oolong.oil.algori.sort;
+package com.oolong.familiar.test;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 public class MaxPQ<Key> implements Iterable<Key> {
     private Key[] pq;                    // store items at indices 1 to n
     private int n;                       // number of items on priority queue
@@ -13,22 +14,37 @@ public class MaxPQ<Key> implements Iterable<Key> {
     //swim和sink的循环不变量：元素k的值比其父元素都小，这也是二叉堆的特性。
     private void swim(int k) {
         //上浮条件：非根节点和父元素比子元素小
-        while (k > 1 && less(k/2, k)) {
-            exch(k, k/2);
+        while(k>1 && less(k/2,k)) {
+            exch(k/2,k);
             k = k/2;
         }
     }
     private void sink(int k) {
-        //下沉条件：拥有至少一个子节点
-        while (2*k <= n) {
-            int j = 2*k;
-            if (j < n && less(j, j+1)) j++;//如果左子节点比右子节点小，则选择下沉到右子节点，否则下沉到左子节点。即下沉到大的节点。
-            if (!less(k, j)) break;//如果比子节点都大，那么已经是符合二叉堆的特性了，直接结束。
-            exch(k, j);
+        //下沉条件：具有至少一个子节点
+        while(k*2 <= n) {
+            int j = k*2;
+            if(j < n && less(j,j+1)) j++;
+            if(less(j,k)) return;
+            exch(k,j);
             k = j;
         }
-    }
 
+    }
+    public void insert(Key x) {
+        if(n == pq.length -1) resize(2*pq.length);
+        pq[++n] = x;
+        swim(n);
+    }
+    public Key delMax() {
+        if(isEmpty()) throw new NoSuchElementException("Priority queen is empty");
+        Key max = pq[1];
+        exch(1,n);
+        pq[n] = null;
+        n--;
+        sink(1);
+        if ((n > 0) && (n == (pq.length - 1) / 4)) resize(pq.length / 2);
+        return max;
+    }
     public MaxPQ(int initCapacity) {
         pq = (Key[]) new Object[initCapacity + 1];
         n = 0;
@@ -79,25 +95,6 @@ public class MaxPQ<Key> implements Iterable<Key> {
         }
         pq = temp;
     }
-
-    public void insert(Key x) {
-        if (n == pq.length - 1) resize(2 * pq.length);
-        // add x, and percolate it up to maintain heap invariant
-        pq[++n] = x;
-        swim(n);
-        assert isMaxHeap();
-    }
-    public Key delMax() {
-        if (isEmpty()) throw new NoSuchElementException("Priority queue underflow");
-        Key max = pq[1];
-        exch(1, n--);
-        sink(1);
-        pq[n+1] = null;     // to avoid loitering and help with garbage collection
-        if ((n > 0) && (n == (pq.length - 1) / 4)) resize(pq.length / 2);
-        assert isMaxHeap();
-        return max;
-    }
-
 
     private boolean less(int i, int j) {
         if (comparator == null) {
