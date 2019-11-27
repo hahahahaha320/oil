@@ -1,25 +1,24 @@
-package com.oolong.oil.algori.tree;
+package com.oolong.oil.algori.graph;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import com.oolong.oil.algori.Stack;
+
+import java.util.*;
 
 public class Graph {
     private static final String NEWLINE = System.getProperty("line.separator");
 
     private final int V;
     private int E;
-    private List<Integer>[] adj;
+    private Set<Integer>[] adj;
     
 
     public Graph(int V) {
         if (V < 0) throw new IllegalArgumentException("Number of vertices must be nonnegative");
         this.V = V;
         this.E = 0;
-        adj = new List[V];
+        adj = new Set[V];
         for (int v = 0; v < V; v++) {
-            adj[v] = new ArrayList<Integer>();
+            adj[v] = new LinkedHashSet<>();
         }
     }
     public Graph(int V,List<Integer>[] adj) {
@@ -41,9 +40,9 @@ public class Graph {
         this.E = G.E();
         if (V < 0) throw new IllegalArgumentException("Number of vertices must be nonnegative");
 
-        adj = new List[V];
+        adj = new Set[V];
         for (int v = 0; v < V; v++) {
-            adj[v] = new ArrayList<Integer>();
+            adj[v] = new LinkedHashSet<>();
         }
 
         for (int v = 0; v < G.V(); v++) {
@@ -82,7 +81,7 @@ public class Graph {
         validateVertex(v);
         return adj[v];
     }
-    public List<Integer> adjBag(int v) {
+    public Set<Integer> adjBag(int v) {
         validateVertex(v);
         return adj[v];
     }

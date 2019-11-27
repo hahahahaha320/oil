@@ -1,4 +1,6 @@
-package com.oolong.oil.algori.tree;
+package com.oolong.oil.algori.graph;
+
+import com.oolong.oil.algori.Stack;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,8 @@ public class DepthFirstSearch {
 
     }
     //非递归dfs
+    //栈内元素都是已经访问过的，但其关联表还未遍历的元素
+    //对顶点的关联表的处理：仅访问并入队列第一个未访问的元素
     private void dfsNoRecursion(Graph G, int v) {
         Stack<Integer> stack = new Stack<>();
         accessVertex(v);

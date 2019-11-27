@@ -1,4 +1,4 @@
-package com.oolong.oil.algori.sort;
+package com.oolong.oil.algori.list;
 
 public class MergeNoRecursion {
 

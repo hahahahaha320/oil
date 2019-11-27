@@ -1,6 +1,6 @@
-package com.oolong.oil.algori.sort;
+package com.oolong.oil.algori.tree;
 
-public class BST{
+public class BST {
     private Node root;
     private boolean isBST() {
         return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);

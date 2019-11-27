@@ -1,4 +1,7 @@
-package com.oolong.oil.algori.tree;
+package com.oolong.oil.algori.graph;
+
+import com.oolong.oil.algori.Queue;
+import com.oolong.oil.algori.Stack;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +33,8 @@ public class BreadthFirstPaths {
     }
 
 
-    // breadth-first search from a single source
+    //队列内元素都是已经访问过的，但其关联表还未遍历的元素
+    //对顶点的关联表的处理：访问并入队列其所有关联表的元素
     private void bfs(Graph G, int s) {
         Queue<Integer> q = new Queue<Integer>();
         for (int v = 0; v < G.V(); v++)

@@ -1,4 +1,4 @@
-package com.oolong.oil.algori.tree;
+package com.oolong.oil.algori;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
