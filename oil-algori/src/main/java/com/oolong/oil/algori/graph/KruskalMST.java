@@ -1,9 +1,6 @@
 package com.oolong.oil.algori.graph;
 
-import com.oolong.oil.algori.In;
-import com.oolong.oil.algori.MinPQ;
-import com.oolong.oil.algori.Queue;
-import com.oolong.oil.algori.StdOut;
+import com.oolong.oil.algori.*;
 
 public class KruskalMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;
@@ -20,7 +17,7 @@ public class KruskalMST {
             pq.insert(e);
         }
 
-        // run greedy algorithm
+        //判断加入会不会导致最小生成树有环，只需简单实用 并查集数据结构，看边的两个点是否连通就可以了。
         UF uf = new UF(G.V());
         while (!pq.isEmpty() && mst.size() < G.V() - 1) {
             Edge e = pq.delMin();

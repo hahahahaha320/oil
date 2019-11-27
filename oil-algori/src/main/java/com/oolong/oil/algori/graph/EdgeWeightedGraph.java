@@ -27,9 +27,11 @@ package com.oolong.oil.algori.graph;
 import com.oolong.oil.algori.Bag;
 import com.oolong.oil.algori.In;
 import com.oolong.oil.algori.Stack;
+import com.oolong.oil.algori.StdRandom;
 
 import java.util.*;
 
+//加权图
 public class EdgeWeightedGraph {
     private static final String NEWLINE = System.getProperty("line.separator");
 

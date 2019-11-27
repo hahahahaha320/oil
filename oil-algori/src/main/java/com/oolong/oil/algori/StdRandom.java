@@ -45,7 +45,7 @@
  *
  ******************************************************************************/
 
-package com.oolong.oil.algori.graph;
+package com.oolong.oil.algori;
 
 import java.util.Random;
 

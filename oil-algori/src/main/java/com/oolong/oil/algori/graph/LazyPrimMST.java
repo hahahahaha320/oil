@@ -1,13 +1,7 @@
 
 package com.oolong.oil.algori.graph;
 
-import com.oolong.oil.algori.In;
-import com.oolong.oil.algori.MinPQ;
-import com.oolong.oil.algori.Queue;
-import com.oolong.oil.algori.StdOut;
-
-import java.util.Arrays;
-import java.util.List;
+import com.oolong.oil.algori.*;
 
 public class LazyPrimMST {
     private static final double FLOATING_POINT_EPSILON = 1E-12;

@@ -7,7 +7,7 @@
  *
  ******************************************************************************/
 
-package com.oolong.oil.algori.graph;
+package com.oolong.oil.algori;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
