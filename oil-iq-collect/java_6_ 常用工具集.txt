@@ -1,5 +1,13 @@
-﻿1.排查JWM问题有哪些常用工具?(你曾经遇到过什么问题,如何排查,如何解决的)
+﻿1.排查JVM问题有哪些常用工具?(你曾经遇到过什么问题,如何排查,如何解决的)
+jmap查看java进程的堆内存信息，jstack查看线程堆栈信息，jstat 对Java虚拟机的资源和性能进行实时的监控，
+jhat：JVM Heap Dump Browser，用于分析heapdump文件；jinfo：Configuration Info for Java，显示JVM配置信息；
+top查看进程和线程信息
+
 2.Git合并代码有哪两种方法?有什么区别?
+
+
 3.Git与SVN有哪些差异?
+Git是分布式的代码控制系统，svn是集中式代码控制系统
+
 4.你所在的团队项目开发使用什么样工作流?有什么优点?
 
