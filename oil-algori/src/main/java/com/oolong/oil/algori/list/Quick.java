@@ -1,4 +1,4 @@
-package com.oolong.oil.algori.sort;
+package com.oolong.oil.algori.list;
 
 import com.oolong.oil.algori.util.Util;
 

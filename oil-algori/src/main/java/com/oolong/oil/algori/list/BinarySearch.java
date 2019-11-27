@@ -1,4 +1,4 @@
-package com.oolong.oil.algori.sort;
+package com.oolong.oil.algori.list;
 
 public class BinarySearch {
     public static int search(int key,int[] arr)    {

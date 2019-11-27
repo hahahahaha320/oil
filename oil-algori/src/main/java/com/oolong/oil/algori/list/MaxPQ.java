@@ -1,4 +1,4 @@
-package com.oolong.oil.algori.sort;
+package com.oolong.oil.algori.list;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
