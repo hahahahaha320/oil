@@ -10,7 +10,8 @@ public class DijkstraSP {
     private DirectedEdge[] edgeTo;    // edgeTo[v] = last edge on shortest s->v path
     private IndexMinPQ<Double> pq;    // priority queue of vertices
 
-    //和最小生成树的切分定理类似，最短路径树到其他顶点的最短边就是下一个要加入的点。
+    //和最小生成树的切分定理类似，起点到其他顶点中距离最短的点就是下一个要加入的点。
+    //Dijkstra算法的实现每次都会为最短路径树添加一条边，该边由一个树中的顶点指向一个非树顶点w且它是到s最近的顶点
     public DijkstraSP(EdgeWeightedDigraph G, int s) {
         for (DirectedEdge e : G.edges()) {
             if (e.weight() < 0)
