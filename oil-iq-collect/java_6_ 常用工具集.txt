@@ -4,10 +4,11 @@ jhat：JVM Heap Dump Browser，用于分析heapdump文件；jinfo：Configuratio
 top查看进程和线程信息
 
 2.Git合并代码有哪两种方法?有什么区别?
-
+git Merge、git Rebase
 
 3.Git与SVN有哪些差异?
-Git是分布式的代码控制系统，svn是集中式代码控制系统
+Git是分布式的代码控制系统，svn是集中式代码控制系统,
+git在分支的创建，切换等都是秒级的，鼓励使用分支开发。
 
 4.你所在的团队项目开发使用什么样工作流?有什么优点?
-
+master + dev的工作流
