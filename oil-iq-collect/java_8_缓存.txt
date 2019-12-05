@@ -1,6 +1,28 @@
 ﻿1. Redis和 Memcache有什么区别?该如何选用?
-2.你用到过哪些Reds的数据结构?用在什么场景下?
+redis支持五种数据结构：string，list，set，hash，zset
+redis支持数据持久化到硬盘
+
+2.你用到过哪些Redis的数据结构?用在什么场景下?
+string：基本使用
+hash：登录时token对应的用户信息
+list:
+
+
+
 3. Redis有哪些持久化方式,区别是什么?
+aof：记录操作日志
+rdb：记录快照
+
+
 4. Redis的过期机制是怎样的? Redis有哪些淘汰策略?
-5.如何保证Reds的高并发和高可用?
-6.如何使用Reds实现延时队列?如何使用Reds实现分布式锁?
+设置值的时候同时设置过期时间，取值时判断是否过期。
+淘汰策略：LRU：最近最少使用，random：随机选择。
+设置了过期时间的lru和random，所有的lru和random。
+
+5.如何保证Redis的高并发和高可用?
+高并发：数据分片，多个master同时提供服务
+高可用：每个master都有slave，当master出问题时切换到slave。
+
+6.如何使用Reds实现延时队列?如何使用Redis实现分布式锁?
+
+
