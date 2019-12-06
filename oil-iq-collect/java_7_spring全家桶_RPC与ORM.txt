@@ -6,21 +6,49 @@ mybatis由开发者自己手写sql，对sql有绝对控制权，方便优化。
 spring的context既是一个BeanFactory，还是一个事件管理器，国际化消息管理器等。context初始化的流程就是这几个组件的初始化过程。首先作为BeanFactory，需要准备类加载器等，然后准备一个BeanFactory对象，然后执行扩展点BeanFactoryPostProcessor，
 
 3.简单介绍一下Bean的生命周期及作用域
+Bean有3个重要的过程：实例化，设置属性，初始化。其他操作是在三个操作的中间实现一些自定义的操作。
+具体为：实例化，设置属性，BeanPostProcessor的before操作，Initializing Bean的afterPropertiesSet操作，配置的init-method，BeanPostProcessor的after操作
+销毁时的操作：destroy操作
 
 4. Spring配置中的 placeholder占位符是如何替换的?有什么办法可以实现自定义的配置替换?
 
+
+
 5. SpringMVC的工作流程是怎样的?
+入口处理是DispatchServlet，根据url解析出对应的Controller方法，这里会进行请求处理。处理结束会得到一个model，
+然后调用ViewResolver得到view，用model和view渲染出响应结果，返回给客户端。
+
 
 6. Spring如何解决循环依赖?
 
-7.Bean的构造方法、@Postconstruct注解、 Initializing Bean、init- method的执样自
 
-8.说说Nety中有哪些重要的对象,它们之间的关系是什么?
+
+7.Bean的构造方法、@Postconstruct注解、 Initializing Bean、init- method的执行顺序是怎样的。
+Bean的构造方法是实例化的一部分，最先执行。题目给出的顺序就是执行顺序
+
+
+8.说说Netty中有哪些重要的对象,它们之间的关系是什么?
+ServerBootstrapt和Bootstrapt：用来帮助开发者构建整个处理逻辑。
+EventLoop，Channel：EventLoop是整个Netty的核心，用来处理io事件。Channel用来代表和客户端的连接。
+ChannelHandler:是开发者放置处理逻辑的地方
+ChannelPipeline：把ChannnelHandler组成一个链条，依次处理。
+
 
 9.RPC与HTTP的区别是什么,什么场景适合选用RPC,什么场景适合使用HTTP?
+RPC是远程方法调用，是分布式系统之间进行方法调用的方法。
+HTTP是一种应用层协议。
+RPC可以通过TCP协议实现，也可以通过HTTP协议实现。
+分布式系统的组件之间适合用RPC，前后端分离适合用HTTP
+
 
 10.RPC的交互流程是怎样的?
+客户端会根据接口自动生成接口的实现类ClientStub，服务端也会根据接口自动生成接口的实现类ServerStub，由它来实现网络协议相关的内容。
+客户端调用方法时，会调用ClientStub对应的方法，然后通过网络协议把调用相关参数转发给服务器的ServerStub，接着调用服务端的实现方法，
+把结果返回给ServerStub，接着通过网络返回给ClientStub，最终客户端得到调用结果。
+
 
 11.请介绍一下 Mybatis的缓存机制
+
+
 
 12. Mybatis如何配置动态SQL?有哪些动态SQL标签?
