@@ -6,12 +6,25 @@
         <result column="name" property="name" />
         <result column="state" property="state" />
         <result column="create_time" property="createTime" />
+        <association property="bookDetail"  javaType="com.oolong.oil.crudexample.model.BookDetail">
+            <id column="book_detail_id" property="id"/>
+            <result column="descr" property="descr"/>
+            <result column="detail_create_time" property="createTime"/>
+        </association>
+        <collection property="chapterList" javaType="List" ofType="com.oolong.oil.crudexample.model.Chapter">
+            <id column="chapter_id" property="id"/>
+            <result column="title" property="title"/>
+            <result column="chapter_create_time" property="createTime"/>
+        </collection>
     </resultMap>
 
 
     <select id="findAll" resultMap="BookesultMap">
-        select id,name,state,create_time create_time
-        from book
+        select b.id,b.name,b.state,b.create_time,b.book_detail_id,
+              d.descr,d.create_time detail_create_time,
+              c.id chapter_id,c.title,c.create_time chapter_create_time
+        from book b left join book_detail d on b.book_detail_id = d.id
+        left join chapter c on b.id=c.book_id
     </select>
     <select id="getById" resultMap="BookesultMap">
         select id,name,state,create_time create_time
