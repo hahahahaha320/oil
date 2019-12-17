@@ -2,6 +2,9 @@ package com.oolong.oil.crudexample.controller;
 
 import com.oolong.oil.crudexample.model.Book;
 import com.oolong.oil.crudexample.service.BookService;
+import com.oolong.oil.crudexample.service.impl.BookServiceJdbcImpl;
+import com.oolong.oil.crudexample.service.impl.BookServiceJpaImpl;
+import com.oolong.oil.crudexample.service.impl.BookServiceMybatisImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +14,12 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
 
-    @Autowired
-    private BookService bookService;
+
+    private @Autowired BookServiceMybatisImpl bookService;
+
+//    private @Autowired BookServiceJdbcImpl bookService;
+
+//    private @Autowired BookServiceJpaImpl bookService;
 
     @RequestMapping("/get_all")
     public List<Book> getAll()  {
@@ -26,7 +33,7 @@ public class BookController {
 
     @PostMapping("/add")
     public String add(@RequestBody Book book)  {
-        bookService.save(book);
+        bookService.insert(book);
         return "ok";
     }
 
@@ -39,7 +46,7 @@ public class BookController {
 
     @PostMapping("/edit")
     public String edit(@RequestBody Book book)  {
-        bookService.save(book);
+        bookService.update(book);
         return "ok";
     }
 }

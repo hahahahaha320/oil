@@ -1,33 +1,20 @@
 package com.oolong.oil.crudexample.service;
 
 import com.oolong.oil.crudexample.model.Book;
-import com.oolong.oil.crudexample.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class BookService {
+public interface BookService {
 
-    @Autowired
-    private BookRepository bookRepository;
 
-    public List<Book> getAllBook()  {
-        return bookRepository.findAll();
-    }
+    List<Book> getAllBook();
 
-    public Book getById(int id)  {
-        Optional<Book> optional = bookRepository.findById(id);
-        return optional.isPresent()?optional.get():null;
-    }
+    Book getById(int id);
 
-    public Book save(Book book)    {
-        return bookRepository.save(book);
-    }
+    int insert(Book book);
+    int update(Book book);
 
-    public void delete(int id)    {
-        bookRepository.deleteById(id);
-    }
+    void delete(int id);
 }

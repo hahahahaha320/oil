@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oolong.oil.crudexample.repository.mybatis.BookRepositoryMybatis">
+    <resultMap id="BookesultMap" type="com.oolong.oil.crudexample.model.Book">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="state" property="state" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+
+    <select id="findAll" resultMap="BookesultMap">
+        select id,name,state,create_time create_time
+        from book
+    </select>
+    <select id="getById" resultMap="BookesultMap">
+        select id,name,state,create_time create_time
+        from book where id=#{value}
+    </select>
+</mapper>
