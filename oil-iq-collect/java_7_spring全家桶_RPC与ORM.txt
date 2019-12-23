@@ -48,7 +48,13 @@ RPC可以通过TCP协议实现，也可以通过HTTP协议实现。
 
 
 11.请介绍一下 Mybatis的缓存机制
-
+一级缓存是SqlSession级别的缓存，缓存的数据只在SqlSession内有效。默认开启。
+二级缓存是mapper级别的缓存，同一个namespace公用这一个缓存，所以对SqlSession是共享的。默认关闭，需要配置开启。
 
 
 12. Mybatis如何配置动态SQL?有哪些动态SQL标签?
+<where> <if> <choose> <when> <otherwise>
+where的作用是进行条件拼接，自动加上where 关键字，而且会把多余的and 或 or 这些连接关键字去掉
+<choose> <when> <otherwise> 就是多重if-else结构。
+<set>: 用于修改的SQL指令
+<foreach>:用来迭代一个集合。
