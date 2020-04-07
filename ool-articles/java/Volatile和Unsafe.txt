@@ -1,0 +1,42 @@
+
+Unsafe:
+
+Java和C++语言的一个重要区别就是Java中我们无法直接操作一块内存区域，不能像C++中那样可以自己申请内存和释放内存。Java中的Unsafe类为我们提供了类似C++手动管理内存的能力。
+Unsafe类，全限定名是sun.misc.Unsafe，从名字中我们可以看出来这个类对普通程序员来说是“危险”的，一般应用开发者不会用到这个类。
+
+过度的使用Unsafe类会使得出错的几率变大，因此Java官方并不建议使用的，官方文档也几乎没有。Oracle正在计划从Java 9中去掉Unsafe类，如果真是如此影响就太大了。
+
+Unsafe用处（节选）：
+
+1.JUC中大量运用了CAS操作，可以说CAS操作是JUC的基础，因此CAS操作是非常重要的。Unsafe中提供了int,long和Object的CAS操作
+
+2.内存屏障：
+public native void loadFence();
+public native void storeFence();
+public native void fullFence();
+
+loadFence：保证在这个屏障之前的所有读操作都已经完成。
+storeFence：保证在这个屏障之前的所有写操作都已经完成。
+fullFence：保证在这个屏障之前的所有读写操作都已经完成。
+
+https://www.jianshu.com/p/db8dce09232d
+
+
+
+
+volatile:
+https://blog.csdn.net/w329636271/article/details/54616543
+https://www.cnblogs.com/monkeysayhi/p/7654460.html
+
+volatile如何保持内存可见性
+volatile的特殊规则就是：
+
+read、load、use动作必须连续出现。
+assign、store、write动作必须连续出现。
+所以，使用volatile变量能够保证:
+
+每次读取前必须先从主内存刷新最新的值。
+每次写入后必须立即同步回主内存当中。
+
+https://www.cnblogs.com/kubidemanong/p/9505944.html
+简单地说，如果一个变量被声明volatile的话，那么这个变量不会被进行重排序，也就是说，虚拟机会保证这个变量之前的代码一定会比它先执行，而之后的代码一定会比它慢执行。

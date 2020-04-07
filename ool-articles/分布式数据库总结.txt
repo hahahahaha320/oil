@@ -1,0 +1,39 @@
+1. SSTable为什么要用 ByteBuf数据类型（本质上是一个DirectByteBuffer,对应一段内存,类似byte[]）?
+因为SSTable最终是要存在磁盘上的，使用这种格式可以加快写盘的速度；
+而且写盘读盘过程省去了内存和磁盘之间数据结构转化的开销，因为byte[]本来就是磁盘读写的格式。
+
+反直觉的是， 内存数据库的性能优势并不是因为它们不需要从磁盘读取的事实。 即使是基于
+磁盘的存储引擎也可能永远不需要从磁盘读取， 因为操作系统缓存最近在内存中使用了磁盘
+块。 相反，它们更快的原因在于省去了将内存数据结构编码为磁盘数据结构的开销。
+-- 来自 《设计数据密集型应用》第83页
+
+2. 数据存储和索引的主要数据结构有哪些？
+日志结构（log-structured） 的存储引擎：
+LSM :  memtable(如跳表Map，红黑树等) -> SSTable -> 不断合并
+
+面向页面（page-oriented） 的存储引擎
+innodb:使用B+树把索引和数据结合起来
+
+而索引结构可以有hash索引，B+树索引等
+
+以上各种存储引擎为了支持crash-safe特性，可以使用预写式日志（WAL, write-ahead-log），这在innodb引擎就是大名鼎鼎的redo log.
+
+
+3.LSM和SSTable的关系
+SSTable本身是个简单而有用的数据结构，就是一个Sorted String Table，排序的字符串表格。
+SSTables and Log Structured Merge Trees
+仅仅SSTable数据结构本身仍然无法support高效的range query和random r/w的场景
+还需要一整套的机制来完成从memory sort, flush to disk, compaction以及快速读取……这样的一个完成的机制和架构称为,
+"The Log-Structured Merge-Tree" (LSM Tree)
+名字很形象, 首先是基于log的, 不断产生SSTable结构的log文件, 并且是需要不断merge以提高效率的。
+
+
+***项目计划：
+一。做一个分布式数据库，要求用到以下技术：
+1).主要分为server和store两部分：
+    server要求集群，应用一个分布式算法。要有注册中心，选主等
+    存储部分使用 复制，分片技术，支持crash-safe，支持wal机制
+
+2).高性能：零拷贝技术
+
+二。做一个RPC框架。支持注册中心，负载均衡等。

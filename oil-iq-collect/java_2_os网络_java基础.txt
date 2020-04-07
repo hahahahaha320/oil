@@ -9,10 +9,11 @@
 
 	
 3. 你经常使用哪些Linux命令，主要用来解决什么问题？
-	grep，cp，find
+	grep，cp，find，top，awk
 
 4. 为什么TCP建连需要3次握手而断连需要4次？
-	客户端需要确认服务端能够正常收发，服务端也需要确认客户端能够正常收发，所以一共需要4个数据包，2个syn和2个ack，服务端把syn和ack整合成一个数据包，所以建连需要3次握手。
+	TCP是双工协议，任意一方都可以主动发起。为了建立双向的链接，所以双方需要先试一下是否可以发送成功，每一方需要一个syn+ack。	客户端需要确认服务端能够正常收发，服务端也需要确认客户端能够正常收发，所以一共需要4个数据包，2个syn和2个ack，服务端把syn和ack整合成一个数据包，所以建连需要3次握手。
+	SYN 洪水攻击:客户端发送syn之后并收到ack+syn之后，不回复ack，导致服务端有大量链接处于syn_rcvd状态（半开放链接）,进而影响其他正常请求的建连。
 	断连时由于服务端在接收到fin回复ack之后，可能还有数据要发送，需要等到数据发送完毕才能发送fin，ack和fin不能够整合成一个数据包，所以需要4次握手。
 
 5.为什么TCP关闭链接时需要TIME_WAIT状态，为什么要等2MSL？
@@ -38,7 +39,7 @@
 	
 
 3.Object中的equals和hashCode的作用分别是什么？
-	equals判断是否相等，hashCode是把对象作为HashMap后HashTable中的key时，通过计算hash值并取模，从而可以确定这个key在数组中的下标。
+	equals判断是否相等，hashCode是把对象作为HashMap或HashTable中的key时，通过计算hash值并取模，从而可以确定这个key在数组中的下标。
 	
 4.final，finally，finalize的区别与使用场景。
 	final要来修饰变量表示变量不可变，修饰方法表示方法不能够被子类覆盖，修饰类表示不能有子类。
@@ -55,5 +56,42 @@ java把所有非正常情况分为两种：异常(Exception)和错误(Error)，�
 在 1.9、1.10 版本中的主要特性是增加了模块系统，将 G1 设为默认垃圾回收器、支持局部变量推断等功能。这些功能都已经包含在 1.11 版本中。
 
 
+7. 设计模式是如何分类的？
+https://blog.csdn.net/itpinpai/article/details/51244491
+分为创建型、结构型、行为型三个类别，是根据应用目的来分的：
+创建型模式关注对象的创建:
+	简单工厂模式（Simple Factory）
+	工厂方法模式（Factory Method）
+	抽象工厂模式（Abstract Factory）
+	创建者模式（Builder）
+	原型模式（Prototype）
+	单例模式（Singleton）
+
+结构型模式关注对象的结构问题，即类或对象之间的组织关系、依赖关系:
+	外观模式/门面模式（Facade门面模式）
+	适配器模式（Adapter）
+	代理模式（Proxy）
+	装饰模式（Decorator）
+	桥梁模式/桥接模式（Bridge）
+	组合模式（Composite）
+	享元模式（Flyweight）
+	
+行为型模式关注对象的行为问题，即类或对象间的交互和职责分配(就是用来干什么):
+	模板方法模式（Template Method）
+	观察者模式（Observer）
+	状态模式（State）
+	策略模式（Strategy）
+	职责链模式（Chain of Responsibility）
+	命令模式（Command）
+	访问者模式（Visitor）
+	调停者模式（Mediator）
+	备忘录模式（Memento）
+	迭代器模式（Iterator）
+	解释器模式（Interpreter）
+
+8.jdk9的模块系统
+本质上讲，模块(module)的概念，其实就是package外再裹一层，也就是说，用模块来管理各个package，通过声明某个package暴露，不声明默认就是隐藏。因此，模块化使得代码组织上更安全，因为它可以指定哪些部分可以暴露，哪些部分隐藏。
+
+模块独立、化繁为简模块化（以 Java 平台模块系统的形式）将 JDK 分成一组模块，可以在编译时，运行时或者构建时进行组合
 
 

@@ -5,7 +5,7 @@ mybatis由开发者自己手写sql，对sql有绝对控制权，方便优化。
 2.能描述一下 Spring Context初始化的整个流程吗?
 spring的context既是一个BeanFactory，还是一个事件管理器，国际化消息管理器等。context初始化的流程就是这几个组件的初始化过程。首先作为BeanFactory，需要准备类加载器等，然后准备一个BeanFactory对象，然后执行扩展点BeanFactoryPostProcessor，
 
-->springboot容易的启动过程？和Spring容器的启动过程相比多了什么？
+->springboot容器的启动过程？和Spring容器的启动过程相比多了什么？
 
 3.简单介绍一下Bean的生命周期及作用域
 Bean有3个重要的过程：实例化，设置属性，初始化。其他操作是在三个操作的中间实现一些自定义的操作。
