@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/oil-algori/oil-algori.iml" filepath="$PROJECT_DIR$/oil-algori/oil-algori.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-crud-example/oil-crud-example.iml" filepath="$PROJECT_DIR$/oil-crud-example/oil-crud-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oil-distributed/oil-distributed.iml" filepath="$PROJECT_DIR$/oil-distributed/oil-distributed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/oolong-oil.iml" filepath="$PROJECT_DIR$/oolong-oil.iml" />
+    </modules>
+  </component>
+</project>

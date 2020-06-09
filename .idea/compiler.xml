@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="oil-algori" />
+        <module name="oil-crud-example" />
+        <module name="oil-distributed" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="oil-algori" target="1.8" />
+      <module name="oil-crud-example" target="1.8" />
+      <module name="oil-distributed" target="1.8" />
+      <module name="oolong-oil" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="oil-algori" options="-parameters" />
+      <module name="oil-crud-example" options="-parameters" />
+      <module name="oil-distributed" options="-parameters" />
+    </option>
+  </component>
+</project>
